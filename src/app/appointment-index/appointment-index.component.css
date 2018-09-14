@@ -1,0 +1,27 @@
+#appointment {
+    text-align: left;
+}
+
+#action {
+    text-align: left;
+}
+
+.header {
+    color: grey;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.appointment-brief {
+    width: 100%;
+    
+}
+
+#search {
+    margin-top: 1rem;
+}
+
+#user-select {
+    
+}

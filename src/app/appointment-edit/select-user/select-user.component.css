@@ -1,0 +1,13 @@
+
+.user-select {
+    width: 100%;
+    border: 1px solid grey;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.user-select:hover {
+    background-color: darkturquoise;
+}

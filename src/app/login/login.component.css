@@ -1,0 +1,25 @@
+.title {
+  text-align: center;
+  color: dodgerblue;
+}
+
+#login {
+    padding: 5px;
+}
+
+.btn-area {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.btn-area button {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#error {
+    text-align: center;
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
+}

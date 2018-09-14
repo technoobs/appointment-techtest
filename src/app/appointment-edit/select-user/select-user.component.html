@@ -1,0 +1,8 @@
+<mat-dialog-content style="text-align: center">
+  <h2 md-dialog-title class="title"> Select Party </h2>
+  <div *ngFor="let user of usersCollection">
+    <div class="user-select" (click)="addUserToAppointment(user)">
+      {{user.Name}}
+    </div>
+  </div>
+</mat-dialog-content>

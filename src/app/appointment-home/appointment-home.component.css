@@ -1,0 +1,9 @@
+.panel {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#display-panel {
+    margin-top: 1rem;
+    padding: 1rem;
+}

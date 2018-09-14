@@ -1,0 +1,43 @@
+<div class="row">
+  <div id="appointment" class="col-8">
+    <div class="header">
+      <a>My Appointments</a>
+    </div>
+    <div *ngIf="preprocessIsFinished">
+      <div *ngIf="displayedAppointments.length == 0; else appointmentListShow">
+        <h4>No appointments found...</h4>
+      </div>
+    </div>
+  </div>
+  <div id="action" class="col-4">
+    <div class="header">
+      <a>Actions</a>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary" (click)="makeAppointment()">Make Appointment</button>
+    </div>
+    <div id="search">
+      <label for="user-select">Search appointment by user</label>
+      <mat-form-field id="user-select">
+        <mat-select>
+          <mat-option *ngFor="let user of usersList" [value]="user.Id">
+            {{user.Name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <select id="user-select">
+        <option *ngFor="let user of usersList" [value]="user.Id">{{ user.Name }}</option>
+      </select> -->
+      <button type="button" class="btn btn-info" (click)="getUserAppointments()">Search</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #appointmentListShow>
+  <div *ngFor="let appointment of displayedAppointments">
+    {{appointment['Id']}}
+    <div class="appointment-breif">
+
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div>
+    <h5>Person to meet</h5>
+    <div *ngIf="selectedUsers.length != 0">
+      <div *ngFor="let user of selectedUsers">
+        {{user.Name}}
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="showSelectUserDialog()">Add Person</button>
+  </div>
+  <form id="appointment-edit" [formGroup]="appointmentFormGroup">
+    <div class="d-flex flex-column">
+      <div>
+        <label for="description">Description</label>
+        <textarea id="description" class="form-control" formControlName="description" placeholder="Description" rows="4" cols="50"></textarea>
+      </div>
+      <div>
+        <label for="">Start Date</label>
+      </div>
+      <div>
+        <label for="">End Date</label>
+      </div>
+    </div>
+  </form>
+  <div class="note-area">
+    <label for="note">Notes</label>
+    <div *ngFor="let note of tempNoteList">
+      <div *ngIf="note != undefined" class="d-flex note-ele">
+        <div class="mr-auto" (click)="editNote()">{{note.note}}</div><i class="fas fa-times" (click)="removeNote(note.id)"></i>
+      </div>
+    </div>
+    <div>
+      <textarea id="note" class="form-control" placeholder="Write note...." rows="4" cols="50"></textarea>
+      <button type="button" class="btn btn-primary" (click)="addNote()">Add Note</button>
+    </div>
+
+  </div>
+</div>

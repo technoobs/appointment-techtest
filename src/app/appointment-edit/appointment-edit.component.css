@@ -1,0 +1,20 @@
+#appointment-edit {
+    text-align: left;
+}
+
+.note-area {
+    /* text-align: left; */
+}
+
+.note-ele {
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: bisque;
+    color: black
+}
+
+.note-ele i {
+    cursor: pointer;
+}

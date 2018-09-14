@@ -1,0 +1,16 @@
+<mat-dialog-content style="text-align: center">
+  <h2 md-dialog-title class="title"> Login </h2>
+  <form id="login" [formGroup]="loginFormGroup">
+    <div class="d-flex flex-column">
+      <label for="provider">Provider Email</label>
+      <input type="text" id="provider" formControlName="providerEmail" class="form-control">
+    </div>
+  </form>
+  <div id="error"></div>
+  <div class="btn-area">
+    <button type="button" class="btn btn-success" (click)="login()">Login</button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="close()" class="btn btn-info">Close</button>
+</mat-dialog-actions>

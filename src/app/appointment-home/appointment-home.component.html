@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="panel">
+    <h3>Appointment Panel</h3>
+    <div *ngIf="!loginStatus" class="panel-btn">
+      <button type="button" class="btn btn-primary" (click)="displayLoginDialog()">Click to login</button>
+    </div>
+    <div *ngIf="loginStatus">
+      <a>Provider Email: {{providerEmail}}</a>
+      <div id="display-panel" class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
