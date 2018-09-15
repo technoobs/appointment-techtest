@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators
 } from '@angular/forms';
 import {
-  MAT_DIALOG_DATA,
   MatDialogRef,
-  MatDialogConfig
 } from '@angular/material';
 
-import { 
+import {
   User,
 } from '../support/model/server-response';
-import { UsersService } from '../services/users.service';
+import {
+  UsersService
+} from '../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -22,18 +25,14 @@ import { UsersService } from '../services/users.service';
 })
 export class LoginComponent implements OnInit {
 
-
-  // After login successful, store provider email into localstorage
-
-
   // login form control
   private loginFormGroup: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef < LoginComponent >,
+    private dialogRef: MatDialogRef < LoginComponent > ,
     private usersService: UsersService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.createLoginForm();
@@ -41,8 +40,6 @@ export class LoginComponent implements OnInit {
 
   // create login form
   createLoginForm(): void {
-    console.log('Create login form');
-
     this.loginFormGroup = this.fb.group({
       providerEmail: ['', Validators.required]
     });
@@ -51,20 +48,26 @@ export class LoginComponent implements OnInit {
   // login
   login(): void {
     // validate login form
-    if(this.loginFormGroup.status == 'INVALID') {
-      
+    if (this.loginFormGroup.status == 'INVALID') {
+      let ele = document.getElementById('error');
+      ele.innerHTML = 'Please enter valid Provider Email';
     } else {
       this.usersService.getAllUsers(this.loginFormGroup.value.providerEmail).subscribe(
         (res) => {
-          console.log(res);
-          // store provider email to local storage
-          localStorage.setItem("providerEmail", this.loginFormGroup.value.providerEmail);
-          // store users to local storage
-          localStorage.setItem("appointmentUsers", JSON.stringify(res));
-          let resultObj = { info: 'success' };
-          this.dialogRef.close(resultObj);
+          if (res == 'timeout') {
+            alert('Request timeout, please check network connection status....');
+          } else {
+            // store provider email to local storage
+            localStorage.setItem("providerEmail", this.loginFormGroup.value.providerEmail);
+            // store users to local storage
+            localStorage.setItem("appointmentUsers", JSON.stringify(res));
+            let resultObj = {
+              info: 'success'
+            };
+            this.dialogRef.close(resultObj);
+          }
         },
-        (error)=> {
+        (error) => {
           console.log(error);
           this.handleError(error);
         }
@@ -81,8 +84,8 @@ export class LoginComponent implements OnInit {
   private handleError(e: object) {
     let ele = document.getElementById('error');
     let errorMsg: string;
-    if(e['status'] == 400) {
-      if(e['statusText'] == 'Product ID Not Found') {
+    if (e['status'] == 400) {
+      if (e['statusText'] == 'Product ID Not Found') {
         errorMsg = 'Provider Email is invalid.';
       }
     }

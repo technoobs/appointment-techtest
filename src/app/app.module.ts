@@ -10,22 +10,22 @@ import {
   MatSelectModule
 } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { AppComponent } from './app.component';
 import { AppointmentIndexComponent } from './appointment-index/appointment-index.component';
 import { LoginComponent } from './login/login.component';
-import { AppointmentShowComponent } from './appointment-show/appointment-show.component';
 import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
 import { SelectUserComponent } from './appointment-edit/select-user/select-user.component';
 import { AppointmentHomeComponent } from './appointment-home/appointment-home.component';
+import { ErrorlightDirective } from './support/directive/errorlight.directive';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'app', pathMatch: 'full'},
   { path: 'app', component: AppointmentHomeComponent },
-  { path: 'app/appointment', component: AppointmentIndexComponent },
+  { path: 'app/appointment/index', component: AppointmentIndexComponent },
   { path: 'app/appointment/add', component: AppointmentEditComponent },
-  { path: 'app/appointment/edit', component: AppointmentEditComponent },
-  { path: 'app/appointment/view', component: AppointmentShowComponent },
+  { path: 'app/appointment/edit/:id', component: AppointmentEditComponent }
 ];
 
 @NgModule({
@@ -33,10 +33,10 @@ const appRoutes: Routes = [
     AppComponent,
     AppointmentIndexComponent,
     LoginComponent,
-    AppointmentShowComponent,
     AppointmentEditComponent,
     SelectUserComponent,
-    AppointmentHomeComponent
+    AppointmentHomeComponent,
+    ErrorlightDirective
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -48,7 +48,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule, 
     MatInputModule, 
-    MatSelectModule
+    MatSelectModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   entryComponents: [
     LoginComponent,

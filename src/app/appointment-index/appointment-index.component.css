@@ -15,11 +15,61 @@
 
 .appointment-brief {
     width: 100%;
-    
+    padding: 2px;
+    margin: 2px;
+}
+
+.appt-info {
+    cursor: pointer;
+    border: 1px solid lightgray;
+    margin: 2px;
+}
+
+.appt-time {
+    /* background-color: beige; */
+}
+
+.appt-time span {
+    font-weight: bold;
+    font-size: 15px;
+    color: deepskyblue;
+}
+
+.time {
+    font-size: 13px;
+}
+
+.appt-user {
+    /* background-color: darkturquoise; */
+    text-align: left;
+}
+
+.appt-user a {
+    color: coral;
+}
+
+.appt-note {
+}
+
+.appt-note ul {
+    margin-left: -1rem;
+}
+
+.appt-op div {
+    margin-left: -5px;
+}
+
+.appt-op i {
+    margin: 1px;
+    cursor: pointer;
 }
 
 #search {
     margin-top: 1rem;
+}
+
+#search label {
+    font-weight: bold;
 }
 
 #user-select {

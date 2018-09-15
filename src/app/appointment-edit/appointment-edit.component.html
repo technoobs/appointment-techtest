@@ -1,38 +1,72 @@
 <div class="container">
-  <div>
-    <h5>Person to meet</h5>
-    <div *ngIf="selectedUsers.length != 0">
-      <div *ngFor="let user of selectedUsers">
-        {{user.Name}}
+  <div id="appt-edit">
+    <h4>Make Appointment</h4>
+    <div class="row">
+      <div class="col-12 party-group">
+        <label for="party">Person to meet</label>
+        <div class="row">
+          <div id="party" class="col-3" *ngIf="selectedUsers.length != 0">
+            <div *ngFor="let user of selectedUsers">
+              <div class="d-flex user-name">
+                <span class="mr-auto">{{user.Name}}</span>
+                <i class="fas fa-times" (click)="removeUser(user.Id)"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary" (click)="showSelectUserDialog()">Add Person</button>
+          </div>
+        </div>
+        <div appErrorlight *ngIf="showPartyError">Please Select Users to meet.</div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="showSelectUserDialog()">Add Person</button>
-  </div>
-  <form id="appointment-edit" [formGroup]="appointmentFormGroup">
-    <div class="d-flex flex-column">
+    <div class="col-12">
+      <form id="appt-edit-form" [formGroup]="appointmentFormGroup">
+        <div class="d-flex flex-column">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control" formControlName="description" placeholder="Description"
+              rows="4" cols="50"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label>
+                  Start Date
+                  <input [owlDateTime]="dt1" [min]="startAt" formControlName="start" class="form-control">
+                  <span class="trigger" [owlDateTimeTrigger]="dt1">
+                    <i class="fas fa-calendar-alt" (click)="setStartDate()"></i>
+                  </span>
+                  <owl-date-time [startAt]="startAt" #dt1></owl-date-time>
+                </label>
+              </div>
+              <label class="col-6">
+                End Date
+                <input [owlDateTime]="dt2" [min]="startAt" formControlName="end" class="form-control">
+                <span class="trigger" [owlDateTimeTrigger]="dt2">
+                  <i class="fas fa-calendar-alt" (click)="setEndDate()"></i>
+                </span>
+                <owl-date-time [startAt]="endAt" #dt2></owl-date-time>
+              </label>
+            </div>
+            <div appErrorlight *ngIf="showTimeError">The End Date should be after Start Date.</div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="note-group">
+      <label for="note">Notes</label>
+      <div *ngFor="let note of tempNoteList">
+        <div *ngIf="note != undefined" class="d-flex note-ele">
+          <div class="mr-auto" (click)="editNote()">{{note.note}}</div><i class="fas fa-times" (click)="removeNote(note.id)"></i>
+        </div>
+      </div>
       <div>
-        <label for="description">Description</label>
-        <textarea id="description" class="form-control" formControlName="description" placeholder="Description" rows="4" cols="50"></textarea>
-      </div>
-      <div>
-        <label for="">Start Date</label>
-      </div>
-      <div>
-        <label for="">End Date</label>
+        <textarea id="note" class="form-control" placeholder="Write note...." rows="4" cols="50"></textarea>
+        <button type="button" class="btn btn-primary" (click)="addNote()">Add Note</button>
       </div>
     </div>
-  </form>
-  <div class="note-area">
-    <label for="note">Notes</label>
-    <div *ngFor="let note of tempNoteList">
-      <div *ngIf="note != undefined" class="d-flex note-ele">
-        <div class="mr-auto" (click)="editNote()">{{note.note}}</div><i class="fas fa-times" (click)="removeNote(note.id)"></i>
-      </div>
-    </div>
-    <div>
-      <textarea id="note" class="form-control" placeholder="Write note...." rows="4" cols="50"></textarea>
-      <button type="button" class="btn btn-primary" (click)="addNote()">Add Note</button>
-    </div>
-
   </div>
 </div>
+
+<button type="button" class="btn btn-primary" (click)="saveForm()">Save</button>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { timeout, catchError} from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
 
@@ -20,9 +21,11 @@ export class UsersService {
     private http: HttpClient
   ) { }
 
-  // get all users
   getAllUsers(providerEmail: string) {
-    return this.http.get<User[]>(this.baseURL + '/api/User?' + 'providerEmail=' + providerEmail);
+    return this.http.get<User[]>(this.baseURL + '/api/User?providerEmail=' + providerEmail).pipe(
+      timeout(2000),
+      catchError(error => of('timeout'))
+    );
   }
 
   // get user by id

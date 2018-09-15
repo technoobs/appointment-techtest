@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { 
-  User
+ Appointment
 } from '../model/server-response';
 
 @Injectable({
@@ -10,13 +10,14 @@ import {
 })
 export class SubjectDataService {
 
-  // user list subject
-  private usersDataSubject = new BehaviorSubject([]);
-  usersData = this.usersDataSubject.asObservable();
+  // appointment count number subject
+  private appointmentCountSubject = new BehaviorSubject(-1);
+  appointmentCountData = this.appointmentCountSubject.asObservable();
 
   constructor() { }
 
-  sendUsersData(users: User[]): void {
-    this.usersDataSubject.next(users);
+  // send appointment count number
+  sendAppointmentCount(count: number): void {
+    this.appointmentCountSubject.next(count);
   }
 }

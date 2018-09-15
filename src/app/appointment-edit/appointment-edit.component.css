@@ -1,5 +1,41 @@
-#appointment-edit {
+label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#appt-edit {
+    margin: 5px;
     text-align: left;
+    padding: 5px;
+    border: 2px solid grey;
+    border-radius: 10px;
+}
+
+.party-group {
+    padding-left: 1rem;
+    text-align: left;
+}
+
+.party-group button {
+    margin-left: 5px;
+}
+
+.user-name {
+    padding: 2px;
+    background-color: aqua;
+    font-size: 15px;
+    margin: 1px;
+}
+
+.user-name i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#appt-edit-form {
+    text-align: left;
+    width: 100%;
 }
 
 .note-area {
@@ -16,5 +52,6 @@
 }
 
 .note-ele i {
+    font-size: 20px;
     cursor: pointer;
 }

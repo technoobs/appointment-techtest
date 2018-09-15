@@ -4,7 +4,7 @@
       <a>My Appointments</a>
     </div>
     <div *ngIf="preprocessIsFinished">
-      <div *ngIf="displayedAppointments.length == 0; else appointmentListShow">
+      <div *ngIf="appointmentList.length == 0; else appointmentListShow">
         <h4>No appointments found...</h4>
       </div>
     </div>
@@ -19,25 +19,71 @@
     <div id="search">
       <label for="user-select">Search appointment by user</label>
       <mat-form-field id="user-select">
-        <mat-select>
+        <mat-select [(ngModel)]="userId" name="user">
+          <mat-option [value]="'all'">Show All</mat-option>
           <mat-option *ngFor="let user of usersList" [value]="user.Id">
             {{user.Name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <!-- <select id="user-select">
-        <option *ngFor="let user of usersList" [value]="user.Id">{{ user.Name }}</option>
-      </select> -->
-      <button type="button" class="btn btn-info" (click)="getUserAppointments()">Search</button>
     </div>
   </div>
 </div>
 
 <ng-template #appointmentListShow>
-  <div *ngFor="let appointment of displayedAppointments">
-    {{appointment['Id']}}
-    <div class="appointment-breif">
-
+  <div class="appointment-breif">
+    <div class="row">
+      <table class="col-12">
+        <tr class="row">
+          <th class="col-3">Time</th>
+          <th class="col-1">People</th>
+          <th class="col-3">Notes</th>
+          <th class="col-4">Description</th>
+        </tr>
+        <tr class="appt-info" *ngFor="let appointment of appointmentList">
+          <div class="row" *ngIf="appointment['Party'].indexOf(userId) != -1 || userId == undefined || userId == 'all'">
+            <td class="col-3 appt-time">
+              <div>
+                <span>Start</span>
+                <div class="time">
+                  {{appointment['Start'] | date:'medium'}}
+                </div>
+              </div>
+              <div>
+                <span>End</span>
+                <div class="time">
+                  {{appointment['End'] | date:'medium'}}
+                </div>
+              </div>
+            </td>
+            <td class="col-1 appt-user">
+              <div *ngFor="let userName of processUsersInfoForName(appointment['Party'])">
+                <a>{{userName}}</a>
+              </div>
+            </td>
+            <td class="col-3 appt-note">
+              <ul>
+                <li *ngFor="let note of appointment['Notes']">{{note}}</li>
+              </ul>
+            </td>
+            <td class="col-4 appt-des">
+              <div>
+                {{appointment['Description']}}
+              </div>
+            </td>
+            <td class="col-1 appt-op">
+              <div>
+                <span>Edit</span>
+                <i class="fas fa-pen" (click)="editAppointment(appointment['Id'])"></i>
+              </div>
+              <div>
+                <span>Delete</span>
+                <i class="fas fa-times" (click)="deleteApointment(appointment['Id'])"></i>
+              </div>
+            </td>
+          </div>
+        </tr>
+      </table>
     </div>
   </div>
 </ng-template>

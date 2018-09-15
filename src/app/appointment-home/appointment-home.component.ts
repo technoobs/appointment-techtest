@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { LoginComponent } from '../login/login.component';
-import { SubjectDataService } from '../support/subject/subject-data.service';
-
-import { 
-  User
-} from '../support/model/server-response';
-
-import { AppointmentService } from '../services/appointment.service';
 
 @Component({
   selector: 'app-appointment-home',
@@ -26,7 +19,6 @@ export class AppointmentHomeComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private subjectDataService: SubjectDataService,
   ) { }
 
   ngOnInit() {
@@ -40,16 +32,15 @@ export class AppointmentHomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log('Login dialog is closed');
-        console.log(result);
-        if(result['info'] == 'success') {
-          this.loginStatus = true;
-          // get provider email from local storage
-          this.providerEmail = localStorage.getItem('providerEmail');
-          // this.subjectDataService.sendUsersData(result['users']);
-          this.router.navigate(['/app/appointment']);
-        } else {
-          this.loginStatus = false;
+        if(result != undefined) {
+          if(result['info'] == 'success') {
+            this.loginStatus = true;
+            // get provider email from local storage
+            this.providerEmail = localStorage.getItem('providerEmail');
+            this.router.navigate(['/app/appointment/index']);
+          } else {
+            this.loginStatus = false;
+          }
         }
       }
     );

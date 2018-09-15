@@ -28,39 +28,33 @@ export class SelectUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.selectedUsers);
     this.processUsersForSelect();
   }
 
   // only display unselected users
   processUsersForSelect() {
-    let allUsers = JSON.parse(localStorage.getItem('appointmentUsers'));
-    // for(let i = 0; i < allUsers.) {
 
-    // }
-    console.log('NKNKNKNKNKNK');
-    console.log(allUsers);
+    let allUsers = JSON.parse(localStorage.getItem('appointmentUsers'));
     if(this.selectedUsers.length == 0) {
-      console.log(1);
       this.usersCollection = allUsers;
     } else {
-      console.log(2);
-      console.log(this.selectedUsers);
-      console.log(this.usersCollection);
+      this.usersCollection = [];
       allUsers.forEach(ele => {
-        if(!this.selectedUsers.includes(ele)) {
-          this.usersCollection.push(ele);
-          console.log('xx');
-          console.log(this.usersCollection);
+        let isFound: boolean = false;
+        for(let i = 0; i < this.selectedUsers.length; i++) {
+          if(this.selectedUsers[i].Id == ele.Id) {
+            isFound = true;
+          }
         }
+        if(isFound == false) {
+          this.usersCollection.push(ele);
+        } 
       });
     }
   }
 
   // add user to appointment
   addUserToAppointment(user: User) {
-    console.log('Adding user...');
-    console.log(user);
     this.dialogRef.close(user);
   }
 
